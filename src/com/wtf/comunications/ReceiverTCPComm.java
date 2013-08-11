@@ -2,6 +2,7 @@ package com.wtf.comunications;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -65,11 +66,7 @@ public class ReceiverTCPComm extends Observable implements Runnable  {
 		//return buffer; 
 	}
 
-	  /**
-     * A handler thread class.  Handlers are spawned from the listening
-     * loop and are responsible for a dealing with a single client
-     * and broadcasting its messages.
-     */
+
     private static class Handler     {
         private String name;
         private Socket socket;
@@ -86,14 +83,7 @@ public class ReceiverTCPComm extends Observable implements Runnable  {
             this.receiver = receiver;
         }
 
-        /**
-         * Services this thread's client by repeatedly requesting a
-         * screen name until a unique one has been submitted, then
-         * acknowledges the name and registers the output stream for
-         * the client in a global set, then repeatedly gets inputs and
-         * broadcasts them.
-         * @throws ClassNotFoundException 
-         */
+      
        // @Override
         public void run()  {
             try {
@@ -113,10 +103,16 @@ public class ReceiverTCPComm extends Observable implements Runnable  {
                     if (name == null) {
                         return;
                     }*/
-                	int val = iStr.read () ; 
-                	byte [] buffer = new byte [val] ; 
-                	iStr.read( buffer); 
-                	Object o = this.receiver.deserialize(buffer);
+                	ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                	int nRead;
+                	byte[] data = new byte[16384];
+
+                	while ((nRead = iStr.read(data, 0, data.length)) != -1) {
+                	  buffer.write(data, 0, nRead);
+                	}
+                	buffer.flush();
+                
+                	Object o = this.receiver.deserialize(buffer.toByteArray());
                 	if (o!=null) {
                 		receiver.setChanged();
                 		receiver.notifyObservers(buffer);

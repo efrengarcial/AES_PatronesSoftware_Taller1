@@ -7,7 +7,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.wtf.comunications.ForwarderTCPComm;
-import com.wtf.comunications.Message;
 import com.wtf.comunications.ReceiverTCPComm;
 
 public class Client   implements Observer {
