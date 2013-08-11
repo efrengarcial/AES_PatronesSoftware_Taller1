@@ -103,12 +103,17 @@ public class ReceiverTCPComm extends Observable implements Runnable  {
                     if (name == null) {
                         return;
                     }*/
+                	boolean traeDatos = false;
                 	ByteArrayOutputStream buffer = new ByteArrayOutputStream();
                 	int nRead;
                 	byte[] data = new byte[16384];
 
                 	while ((nRead = iStr.read(data, 0, data.length)) != -1) {
                 	  buffer.write(data, 0, nRead);
+                	  traeDatos = true;
+                	}
+                	if (!traeDatos){
+                		return ;
                 	}
                 	buffer.flush();
                 
