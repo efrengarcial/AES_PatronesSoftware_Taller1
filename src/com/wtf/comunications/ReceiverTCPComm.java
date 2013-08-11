@@ -17,7 +17,6 @@ public class ReceiverTCPComm extends Observable implements Runnable  {
 	private InputStream iStr; 
 	private String myName; 
 	
-
 	
 	public ReceiverTCPComm(String theName) { myName = theName;}
 	
@@ -28,10 +27,8 @@ public class ReceiverTCPComm extends Observable implements Runnable  {
 			is = new ObjectInputStream(in);
 			return is.readObject();
 		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}	   
-		return null;
 	}
 
 	@Override
@@ -93,11 +90,7 @@ public class ReceiverTCPComm extends Observable implements Runnable  {
                     socket.getInputStream()));
                 iStr= socket.getInputStream();
                 
-
-                // Request a name from this client.  Keep requesting until
-                // a name is submitted that is not already used.  Note that
-                // checking for the existence of a name and adding the name
-                // must be done while locking the set of names.
+               
                 while (true) {
                     /*name = in.readLine();
                     if (name == null) {
@@ -125,14 +118,8 @@ public class ReceiverTCPComm extends Observable implements Runnable  {
                 }
 
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
-                // This client is going down!  Remove its name and its print
-                // writer from the sets, and close its socket.
-//                if (name != null) {
-//                    names.remove(name);
-//                }
                 if (in != null) {
                     try {
 						in.close();
