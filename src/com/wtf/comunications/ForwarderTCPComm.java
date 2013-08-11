@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class ForwarderSocketComm {
+public class ForwarderTCPComm {
 	private Socket s; 
 	private OutputStream oStr; 
 	private String myName; 
-	public ForwarderSocketComm(String theName) { 
+	public ForwarderTCPComm(String theName) { 
 		myName = theName ;
 	}
 	private  byte []  marshal (/*Message theMsg*/) { 
