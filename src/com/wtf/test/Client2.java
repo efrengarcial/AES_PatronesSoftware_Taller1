@@ -3,32 +3,23 @@ package com.wtf.test;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import com.wtf.comunications.ForwarderTCPComm;
 import com.wtf.comunications.Message;
-import com.wtf.comunications.ReceiverTCPComm;
 
-public class Client   implements Observer {
+public class Client2   implements Observer {
 
-	ReceiverTCPComm  r; 
 	ForwarderTCPComm f;
 
 	public static void main(String[] args) throws IOException { 
-		ExecutorService service = Executors.newFixedThreadPool(10);
-		Client c = new Client();
-		byte result[] = null; 
-		c.r = new ReceiverTCPComm ("Server") ; 
-		c.r.addObserver(c);
-		service.submit(c.r);
-		//result = c.r. receive ( ) ; 
+		Client2 c = new Client2();
+
 	
-		/*c.f = new ForwarderTCPComm ("Server") ; 
+		c.f = new ForwarderTCPComm ("Server") ; 
 		Message msg = new Message ("Server","It am alive") ; 
 		//f.sendMsg (result. sender, msg) ;
 		c.f.sendMsg("Server", msg);
-		System.out.println("ok.....");*/
+		System.out.println("ok.....");
 	}
 
 	@Override
