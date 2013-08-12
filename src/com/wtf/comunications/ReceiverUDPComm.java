@@ -31,6 +31,9 @@ public class ReceiverUDPComm extends Observable  implements IReceiverComm {
 		receive();
 	}
 
+	/***
+	 * receive udp
+	 */
 	private void receive() {
 		try { 
 			//Entry entry = fr.reg.get(myName) ; 
