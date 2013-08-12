@@ -10,17 +10,17 @@ import java.util.Observer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.wtf.comunications.ReceiverUDP;
+import com.wtf.comunications.ReceiverUDPComm;
 
 public class ClientRUDP implements Observer {
 
-	ReceiverUDP  r; 
+	ReceiverUDPComm  r; 
 	
 	public static void main(String[] args) { 
 		ExecutorService service = Executors.newFixedThreadPool(10);
 		ClientRUDP c = new ClientRUDP();
 		byte result[] = null; 
-		c.r = new ReceiverUDP("Server") ; 
+		c.r = new ReceiverUDPComm("Server") ; 
 		c.r.addObserver(c);
 		service.submit(c.r);
 		//result = c.r. receive ( ) ; 

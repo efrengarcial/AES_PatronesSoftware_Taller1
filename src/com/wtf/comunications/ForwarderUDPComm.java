@@ -9,7 +9,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class ForwarderUDP {
+public class ForwarderUDPComm {
 
 	private String host;
 	private int port;
@@ -23,7 +23,7 @@ public class ForwarderUDP {
 	 * @param host
 	 * @param port
 	 */
-	public ForwarderUDP(String host, int port) {
+	public ForwarderUDPComm(String host, int port) {
 		super();
 		this.host = host;
 		this.port = port;

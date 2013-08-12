@@ -7,11 +7,11 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.Observable;
 
-public class ReceiverUDP extends Observable  implements IReceiverComm {
+public class ReceiverUDPComm extends Observable  implements IReceiverComm {
 	private DatagramSocket listener ; 
 	private String myName; 
 
-	public ReceiverUDP(String theName) { 
+	public ReceiverUDPComm(String theName) { 
 		myName = theName;
 	}
 
