@@ -14,7 +14,11 @@ public class ReceiverUDPComm extends Observable  implements IReceiverComm {
 	public ReceiverUDPComm(String theName) { 
 		myName = theName;
 	}
-
+	/***
+	 * unmarshall
+	 * @param data
+	 * @return
+	 */
 	private Object unmarshall(byte[] data) {
 		ByteArrayInputStream in = new ByteArrayInputStream(data);
 		ObjectInputStream is;
