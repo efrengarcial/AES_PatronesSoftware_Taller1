@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.wtf.comunications.RequestDispatcherMessage;
 import com.wtf.comunications.ForwarderTCP;
 import com.wtf.comunications.Message;
 
@@ -16,7 +17,7 @@ public class Client2   implements Observer {
 
 	
 		c.f = new ForwarderTCP ("Server") ; 
-		Message msg = new Message ("Server","It am alive") ; 
+		Message msg = new RequestDispatcherMessage("Server","It am alive") ; 
 		//f.sendMsg (result. sender, msg) ;
 		c.f.sendMsg("Server", msg);
 		System.out.println("ok.....");

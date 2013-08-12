@@ -20,7 +20,8 @@ public class Receiver implements Observer  {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		
+		Command command = ((Command)arg1);
+		command.execute();
 	}
 
 }

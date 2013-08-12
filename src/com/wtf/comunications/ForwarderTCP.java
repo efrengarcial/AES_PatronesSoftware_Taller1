@@ -24,7 +24,7 @@ public class ForwarderTCP {
 	 private void deliver(String theDest, byte[] data) { 
 		try {
 			//Entry entry = fr.reg.get (theDest1  ;
-			s = new Socket(/*entry.dest0*/"192.168.0.11", 528/*entry.port()*/); 
+			s = new Socket(/*entry.dest0*/"192.168.0.10", 528/*entry.port()*/); 
 			oStr = s.getOutputStream() ; 
 			oStr.write(data); 
 			oStr.flush(); 
