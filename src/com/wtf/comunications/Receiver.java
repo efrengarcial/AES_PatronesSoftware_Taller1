@@ -8,11 +8,11 @@ import java.util.concurrent.Executors;
 public class Receiver implements Observer  {
 
 	
-	ReceiverProtocol  r; 
+	IReceiverComm  r; 
 	
 	public void receiveMsg () { 
 		ExecutorService service = Executors.newFixedThreadPool(10);
-		ReceiverProtocol protocol = new ReceiverTCP ("Server") ;
+		IReceiverComm protocol = new ReceiverTCPComm ("Server") ;
 		//http://en.wikipedia.org/wiki/Observer_pattern
 		protocol.addObserver(this);
 		service.submit(protocol);

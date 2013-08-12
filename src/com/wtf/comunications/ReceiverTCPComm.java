@@ -11,11 +11,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Observable;
 
-public class ReceiverTCP extends Observable  implements ReceiverProtocol {
+public class ReceiverTCPComm extends Observable  implements IReceiverComm {
 	private ServerSocket listener ; 
 	private String myName; 
 
-	public ReceiverTCP(String theName) { 
+	public ReceiverTCPComm(String theName) { 
 		myName = theName;
 	}
 
@@ -32,10 +32,10 @@ public class ReceiverTCP extends Observable  implements ReceiverProtocol {
 
 	@Override
 	public void run()  {
-		receive();
+		acceptConnection();
 	}
 
-	private void receive() {
+	private void acceptConnection() {
 		try { 
 			//Entry entry = fr.reg.get(myName) ; 
 			listener  = new ServerSocket(/*entry.port()*/528, 1000); 
@@ -61,13 +61,13 @@ public class ReceiverTCP extends Observable  implements ReceiverProtocol {
 		private Socket socket;
 		private BufferedReader in;
 		private InputStream iStr; 
-		private ReceiverTCP receiver;
+		private ReceiverTCPComm receiver;
 
 		/**
 		 * Constructs a handler thread, squirreling away the socket.
 		 * All the interesting work is done in the run method.
 		 */
-		public Handler(Socket socket,ReceiverTCP receiver) {
+		public Handler(Socket socket,ReceiverTCPComm receiver) {
 			this.socket = socket;
 			this.receiver = receiver;
 		}

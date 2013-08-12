@@ -6,20 +6,20 @@ import java.util.Observer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.wtf.comunications.ForwarderTCP;
-import com.wtf.comunications.ReceiverProtocol;
-import com.wtf.comunications.ReceiverTCP;
+import com.wtf.comunications.ForwarderTCPComm;
+import com.wtf.comunications.IReceiverComm;
+import com.wtf.comunications.ReceiverTCPComm;
 
 public class Client   implements Observer {
 
-	ReceiverProtocol  r; 
-	ForwarderTCP f;
+	IReceiverComm  r; 
+	ForwarderTCPComm f;
 
 	public static void main(String[] args) throws IOException { 
 		ExecutorService service = Executors.newFixedThreadPool(10);
 		Client c = new Client();
 		byte result[] = null; 
-		c.r = new ReceiverTCP ("Server") ;
+		c.r = new ReceiverTCPComm ("Server") ;
 		//http://en.wikipedia.org/wiki/Observer_pattern
 		c.r.addObserver(c);
 		service.submit(c.r);

@@ -5,21 +5,21 @@ import java.util.Observable;
 import java.util.Observer;
 
 import com.wtf.comunications.RequestDispatcherMessage;
-import com.wtf.comunications.ForwarderTCP;
+import com.wtf.comunications.ForwarderTCPComm;
 import com.wtf.comunications.Message;
 
 public class Client2   implements Observer {
 
-	ForwarderTCP f;
+	ForwarderTCPComm f;
 
 	public static void main(String[] args) throws IOException { 
 		Client2 c = new Client2();
 
 	
-		c.f = new ForwarderTCP ("Server") ; 
+		c.f = new ForwarderTCPComm ("Server") ; 
 		Message msg = new RequestDispatcherMessage("Server","It am alive") ; 
 		//f.sendMsg (result. sender, msg) ;
-		c.f.sendMsg("Server", msg);
+		c.f.sendRequest("Server", msg);
 		System.out.println("ok.....");
 	}
 

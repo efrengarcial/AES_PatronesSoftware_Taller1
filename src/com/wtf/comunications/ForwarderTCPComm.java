@@ -6,11 +6,11 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class ForwarderTCP {
+public class ForwarderTCPComm  implements IForwarderComm{
 	private Socket s; 
 	private OutputStream oStr; 
 	private String myName; 
-	public ForwarderTCP(String theName) { 
+	public ForwarderTCPComm(String theName) { 
 		myName = theName ;
 	}
 		
@@ -36,7 +36,7 @@ public class ForwarderTCP {
 		} 
 	}
 	
-	public void sendMsg (String  theDest ,Message theMsg) throws IOException { 
+	public void sendRequest (String  theDest ,Message theMsg) throws IOException { 
 		deliver(theDest, marshall(theMsg) ) ;
 	}
 }
