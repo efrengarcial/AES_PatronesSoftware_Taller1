@@ -4,18 +4,18 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-import com.wtf.comunications.ForwarderTCPComm;
+import com.wtf.comunications.ForwarderTCP;
 import com.wtf.comunications.Message;
 
 public class Client2   implements Observer {
 
-	ForwarderTCPComm f;
+	ForwarderTCP f;
 
 	public static void main(String[] args) throws IOException { 
 		Client2 c = new Client2();
 
 	
-		c.f = new ForwarderTCPComm ("Server") ; 
+		c.f = new ForwarderTCP ("Server") ; 
 		Message msg = new Message ("Server","It am alive") ; 
 		//f.sendMsg (result. sender, msg) ;
 		c.f.sendMsg("Server", msg);

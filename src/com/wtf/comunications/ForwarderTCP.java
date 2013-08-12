@@ -6,19 +6,15 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class ForwarderTCPComm {
+public class ForwarderTCP {
 	private Socket s; 
 	private OutputStream oStr; 
 	private String myName; 
-	public ForwarderTCPComm(String theName) { 
+	public ForwarderTCP(String theName) { 
 		myName = theName ;
 	}
-	private  byte []  marshal (/*Message theMsg*/) { 
-		/*  . . . */ 
-		return null; 
-	}
-	
-	public  byte[] serialize(Object obj) throws IOException {
+		
+	public  byte[] marshall(Object obj) throws IOException {
 	    ByteArrayOutputStream out = new ByteArrayOutputStream();
 	    ObjectOutputStream os = new ObjectOutputStream(out);
 	    os.writeObject(obj);
@@ -41,6 +37,6 @@ public class ForwarderTCPComm {
 	}
 	
 	public void sendMsg (String  theDest ,Message theMsg) throws IOException { 
-		deliver(theDest, serialize(theMsg) ) ;
+		deliver(theDest, marshall(theMsg) ) ;
 	}
 }
