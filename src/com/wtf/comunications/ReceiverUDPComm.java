@@ -3,18 +3,17 @@ package com.wtf.comunications;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-public class ReceiverUDPComm extends Receiver {
-	private int port;
+import com.wtf.commons.Configuration;
 
-	public ReceiverUDPComm(int port) { 
-		this.port = port;
-	}
+public class ReceiverUDPComm extends Receiver {
 	
+	public ReceiverUDPComm() { 
+	}
 
 	public byte[] receive() {
         DatagramSocket socket = null;
         try {
-            socket = new DatagramSocket(port);
+            socket = new DatagramSocket(Integer.valueOf(Configuration.PORT));
             byte[] buffer = new byte[1024];
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
             socket.receive(packet);

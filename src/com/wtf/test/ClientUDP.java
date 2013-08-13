@@ -4,23 +4,28 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.wtf.commons.Configuration;
+import com.wtf.commons.Entry;
+import com.wtf.commons.ForwarderFactory;
+import com.wtf.commons.RegistrySingleton;
+import com.wtf.comunications.Forwarder;
 import com.wtf.comunications.ForwarderUDPComm;
 import com.wtf.comunications.messages.Message;
-import com.wtf.comunications.messages.RespDispatcherRegisterMessage;
+import com.wtf.comunications.messages.ReqDispatcherRegisterMessage;
+
 
 public class ClientUDP   implements Observer {
 
-	ForwarderUDPComm f;
+	static Forwarder forwarder = ForwarderFactory.get();
 
 	public static void main(String[] args) throws IOException { 
-		ClientUDP c = new ClientUDP();
-
-	
-		c.f = new ForwarderUDPComm ("localhost",9876) ; 
-		Message msg = new RespDispatcherRegisterMessage ("Server","It am alive efl12345") ; 
-		//f.sendMsg (result. sender, msg) ;
-		c.f.deliver(msg);
-		System.out.println("ok.....");
+		
+		Entry theEntry = new Entry("127.0.0.1", 1000, "UDP");
+		RegistrySingleton.getInstance().put("DISPATCHER", theEntry);
+		
+		//c.f = new ForwarderTCPComm ("Server") ; 
+		Message msg = new ReqDispatcherRegisterMessage(Configuration.HOST,"Estoy registrandome...") ; 
+		forwarder.sendMessage("DISPATCHER", msg);
 	}
 
 	@Override
