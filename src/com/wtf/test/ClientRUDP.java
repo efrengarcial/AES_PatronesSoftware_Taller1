@@ -20,9 +20,9 @@ public class ClientRUDP implements Observer {
 		ExecutorService service = Executors.newFixedThreadPool(10);
 		ClientRUDP c = new ClientRUDP();
 		byte result[] = null; 
-		c.r = new ReceiverUDPComm("Server") ; 
-		c.r.addObserver(c);
-		service.submit(c.r);
+		//c.r = new ReceiverUDPComm("Server") ; 
+		//c.r.addObserver(c);
+		//service.submit(c.r);
 		//result = c.r. receive ( ) ; 
 		 System.out.println("ccccc");
 	}

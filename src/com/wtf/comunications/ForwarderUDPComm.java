@@ -9,6 +9,8 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
 
+import com.wtf.comunications.messages.Message;
+
 public class ForwarderUDPComm {
 
 	private String host;

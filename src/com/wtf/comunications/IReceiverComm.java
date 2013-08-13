@@ -4,7 +4,8 @@ import java.util.Observer;
 
 
 public interface IReceiverComm extends Runnable  {
-	void run() ;
+	 
+	public byte[] receive();
 
 	void addObserver(Observer o);
 }

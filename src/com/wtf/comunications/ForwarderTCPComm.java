@@ -1,42 +1,31 @@
 package com.wtf.comunications;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class ForwarderTCPComm  implements IForwarderComm{
+import com.wtf.commons.Entry;
+import com.wtf.commons.RegistrySingleton;
+
+public class ForwarderTCPComm  extends  Forwarder{
 	private Socket s; 
 	private OutputStream oStr; 
-	private String myName; 
-	public ForwarderTCPComm(String theName) { 
-		myName = theName ;
-	}
-		
-	public  byte[] marshall(Object obj) throws IOException {
-	    ByteArrayOutputStream out = new ByteArrayOutputStream();
-	    ObjectOutputStream os = new ObjectOutputStream(out);
-	    os.writeObject(obj);
-	    return out.toByteArray();
-	}
+
 	
-	 private void deliver(String theDest, byte[] data) { 
+	public void deliver(String theDest,byte[] data) {
 		try {
-			//Entry entry = fr.reg.get (theDest1  ;
-			s = new Socket(/*entry.dest0*/"192.168.0.10", 528/*entry.port()*/); 
+			Entry entry = RegistrySingleton.getInstance().get (theDest) ;
+			s = new Socket(entry.getDestinationId(),entry.getPortNr()); 
 			oStr = s.getOutputStream() ; 
 			oStr.write(data); 
 			oStr.flush(); 
 			oStr.close(); 
 			s.close(); 
-			
+
 		} catch(IOException e) { 
 			e.printStackTrace();
 		} 
 	}
-	
-	public void sendRequest (String  theDest ,Message theMsg) throws IOException { 
-		deliver(theDest, marshall(theMsg) ) ;
-	}
+
+
 }

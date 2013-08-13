@@ -1,47 +1,29 @@
 package com.wtf.comunications;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Observable;
 
-public class ReceiverTCPComm extends Observable  implements IReceiverComm {
-	private ServerSocket listener ; 
-	private String myName; 
+import com.wtf.commons.Configuration;
 
-	public ReceiverTCPComm(String theName) { 
-		myName = theName;
+public class ReceiverTCPComm   extends Receiver {
+
+	
+	public ReceiverTCPComm() { 
 	}
-
-	private Object unmarshall(byte[] data) {
-		ByteArrayInputStream in = new ByteArrayInputStream(data);
-		ObjectInputStream is;
-		try {
-			is = new ObjectInputStream(in);
-			return is.readObject();
-		} catch (ClassNotFoundException | IOException e) {
-			return null;
-		}
-	}
-
-	@Override
-	public void run()  {
-		acceptConnection();
-	}
-
-	private void acceptConnection() {
+	
+	public  byte[] receive() {
+		ServerSocket listener = null;
 		try { 
 			//Entry entry = fr.reg.get(myName) ; 
-			listener  = new ServerSocket(/*entry.port()*/528, 1000); 
+			listener  = new ServerSocket(Integer.parseInt(Configuration.PORT), 1000); 
 			while (true) {
 				// starts the event thread			       
-				new Handler(listener.accept(),this).run();
+				return new Handler(listener.accept()).run();
 				//new Handler(listener.accept(),this).start();
 			}
 		} catch (IOException e) {
@@ -53,26 +35,23 @@ public class ReceiverTCPComm extends Observable  implements IReceiverComm {
 				e.printStackTrace();
 			}
 		}
-	}
-
+		return null;
+	}	
 
 	private static class Handler     {
-		private String name;
 		private Socket socket;
 		private BufferedReader in;
 		private InputStream iStr; 
-		private ReceiverTCPComm receiver;
 
 		/**
 		 * Constructs a handler thread, squirreling away the socket.
 		 * All the interesting work is done in the run method.
 		 */
-		public Handler(Socket socket,ReceiverTCPComm receiver) {
+		public Handler(Socket socket) {
 			this.socket = socket;
-			this.receiver = receiver;
 		}
 
-		public void run()  {
+		public  byte[] run()  {
 			try {
 
 				// Create character streams for the socket.
@@ -92,15 +71,12 @@ public class ReceiverTCPComm extends Observable  implements IReceiverComm {
 						traeDatos = true;
 					}
 					if (!traeDatos){
-						return ;
+						return null;
 					}
 					buffer.flush();
 
-					Object mensaje = this.receiver.unmarshall(buffer.toByteArray());
-					if (mensaje!=null) {
-						receiver.setChanged();
-						receiver.notifyObservers(mensaje);
-					}
+					return buffer.toByteArray();
+					
 				}
 
 			} catch (IOException e) {
@@ -119,6 +95,7 @@ public class ReceiverTCPComm extends Observable  implements IReceiverComm {
 					e.printStackTrace();
 				}
 			}
+			return null;
 		}
 	}
 }

@@ -1,60 +1,31 @@
 package com.wtf.comunications;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.util.Observable;
 
-public class ReceiverUDPComm extends Observable  implements IReceiverComm {
-	private DatagramSocket listener ; 
-	private String myName; 
+public class ReceiverUDPComm extends Receiver {
+	private int port;
 
-	public ReceiverUDPComm(String theName) { 
-		myName = theName;
+	public ReceiverUDPComm(int port) { 
+		this.port = port;
 	}
-	/***
-	 * unmarshall
-	 * @param data
-	 * @return
-	 */
-	private Object unmarshall(byte[] data) {
-		ByteArrayInputStream in = new ByteArrayInputStream(data);
-		ObjectInputStream is;
-		try {
-			is = new ObjectInputStream(in);
-			return is.readObject();
-		} catch (ClassNotFoundException | IOException e) {
-			return null;
-		}
-	}
+	
 
-	@Override
-	public void run()  {
-		receive();
-	}
-
-	/***
-	 * receive udp
-	 */
-	private void receive() {
-		try { 
-			//Entry entry = fr.reg.get(myName) ; 
-			   listener  = new DatagramSocket(/*entry.port()*/9876);  
-			   byte[] receiveData = new byte[1024];     
-			while (true) {
-				DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length); 
-				listener.receive(receivePacket);   
-				String sentence = new String( receivePacket.getData());      
-				System.out.println("RECEIVED: " + sentence.toString());  
-				unmarshall(receivePacket.getData());
-			}
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-				listener.close();
-		}
-	}
+	public byte[] receive() {
+        DatagramSocket socket = null;
+        try {
+            socket = new DatagramSocket(port);
+            byte[] buffer = new byte[1024];
+            DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+            socket.receive(packet);
+            return packet.getData();
+        } catch (Exception e) {
+        	e.printStackTrace();
+        	return null;
+        } finally {
+            if (socket != null) {
+                socket.close();
+            }
+        }
+    }
 }

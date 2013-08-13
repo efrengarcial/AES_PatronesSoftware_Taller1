@@ -8,7 +8,6 @@ import java.util.concurrent.Executors;
 
 import com.wtf.comunications.ForwarderTCPComm;
 import com.wtf.comunications.IReceiverComm;
-import com.wtf.comunications.ReceiverTCPComm;
 
 public class Client   implements Observer {
 
@@ -19,9 +18,9 @@ public class Client   implements Observer {
 		ExecutorService service = Executors.newFixedThreadPool(10);
 		Client c = new Client();
 		byte result[] = null; 
-		c.r = new ReceiverTCPComm ("Server") ;
+		//c.r = new ReceiverTCPComm ("Server") ;
 		//http://en.wikipedia.org/wiki/Observer_pattern
-		c.r.addObserver(c);
+		//c.r.addObserver(c);
 		service.submit(c.r);
 		//result = c.r. receive ( ) ; 
 	
