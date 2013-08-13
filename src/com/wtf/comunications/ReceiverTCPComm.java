@@ -20,7 +20,7 @@ public class ReceiverTCPComm   extends Receiver {
 		ServerSocket listener = null;
 		try { 
 			//Entry entry = fr.reg.get(myName) ; 
-			System.out.println("El host "+ Configuration.HOST + ", esta ecuchando el puerto: " + Configuration.PORT );
+			System.out.println("El host "+ Configuration.lOCALHOST + ", esta ecuchando el puerto: " + Configuration.PORT );
 			listener  = new ServerSocket(Integer.parseInt(Configuration.PORT), 1000); 
 			while (true) {
 				// starts the event thread			       

@@ -7,5 +7,4 @@ public class ReqDispatcherUnRegisterMessage extends Message {
 	public ReqDispatcherUnRegisterMessage(String thesender, Object rawData) {
 		super(thesender, rawData);
 	}
-
 }

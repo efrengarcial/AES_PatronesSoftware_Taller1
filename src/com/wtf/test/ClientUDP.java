@@ -24,7 +24,7 @@ public class ClientUDP   implements Observer {
 		RegistrySingleton.getInstance().put("DISPATCHER", theEntry);
 		
 		//c.f = new ForwarderTCPComm ("Server") ; 
-		Message msg = new ReqDispatcherRegisterMessage(Configuration.HOST,"Estoy registrandome...") ; 
+		Message msg = new ReqDispatcherRegisterMessage(Configuration.lOCALHOST,"Estoy registrandome...") ; 
 		forwarder.sendMessage("DISPATCHER", msg);
 	}
 
