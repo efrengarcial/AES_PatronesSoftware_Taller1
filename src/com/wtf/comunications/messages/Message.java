@@ -7,7 +7,6 @@ public abstract class Message implements Serializable {
 	private static final long serialVersionUID = -6593570869909632263L;
 	private String sender; 
 	private Object data; 
-	private TipoMensaje tipoMensaje;
 	
 	public Message  (String thesender, Object rawData) { 
 		setSender(thesender); 
@@ -30,15 +29,5 @@ public abstract class Message implements Serializable {
 	public void setData(Object data) {
 		this.data = data;
 	}
-	
 
-	public TipoMensaje getTipoMensaje() {
-		return tipoMensaje;
-	}
-
-
-	public void setTipoMensaje(TipoMensaje tipoMensaje) {
-		this.tipoMensaje = tipoMensaje;
-	}
-	
 }

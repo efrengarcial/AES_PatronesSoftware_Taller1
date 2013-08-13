@@ -6,7 +6,7 @@ import java.util.Observer;
 
 import com.wtf.comunications.ForwarderUDPComm;
 import com.wtf.comunications.messages.Message;
-import com.wtf.comunications.messages.ReqDispatcherRegisterMessage;
+import com.wtf.comunications.messages.RespDispatcherRegisterMessage;
 
 public class ClientUDP   implements Observer {
 
@@ -17,7 +17,7 @@ public class ClientUDP   implements Observer {
 
 	
 		c.f = new ForwarderUDPComm ("localhost",9876) ; 
-		Message msg = new ReqDispatcherRegisterMessage ("Server","It am alive efl12345") ; 
+		Message msg = new RespDispatcherRegisterMessage ("Server","It am alive efl12345") ; 
 		//f.sendMsg (result. sender, msg) ;
 		c.f.deliver(msg);
 		System.out.println("ok.....");
