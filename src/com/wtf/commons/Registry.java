@@ -12,6 +12,10 @@ public class Registry {
 		return (Entry) hTable.get (aKey)  ; 
 	}
 	
+	public void remove(String theKey) { 
+		hTable.remove(theKey);
+	}
+	
 	public  Hashtable<String,Entry> getAll(){
 		return hTable;
 	}

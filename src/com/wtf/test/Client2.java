@@ -10,7 +10,7 @@ import com.wtf.commons.ForwarderFactory;
 import com.wtf.commons.RegistrySingleton;
 import com.wtf.comunications.Forwarder;
 import com.wtf.comunications.messages.Message;
-import com.wtf.comunications.messages.ReqDispatcherRegistryMessage;
+import com.wtf.comunications.messages.ReqDispatcherRegisterMessage;
 
 public class Client2   implements Observer {
 
@@ -22,10 +22,9 @@ public class Client2   implements Observer {
 		RegistrySingleton.getInstance().put("DISPATCHER", theEntry);
 		
 		//c.f = new ForwarderTCPComm ("Server") ; 
-		Message msg = new ReqDispatcherRegistryMessage(Configuration.HOST,"It am alive") ; 
+		Message msg = new ReqDispatcherRegisterMessage(Configuration.HOST,"Estoy registrandome...") ; 
 		forwarder.sendMessage("DISPATCHER", msg);
 		
-		System.out.println("ok.....");
 	}
 
 	@Override

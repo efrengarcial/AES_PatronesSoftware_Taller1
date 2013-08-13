@@ -15,6 +15,7 @@ public class ForwarderTCPComm  extends  Forwarder{
 	public void deliver(String theDest,byte[] data) {
 		try {
 			Entry entry = RegistrySingleton.getInstance().get (theDest) ;
+			System.out.println("Enviando mensaje al host: "+ entry.getDestinationId() + ", por el puerto: "+entry.getPortNr() );
 			s = new Socket(entry.getDestinationId(),entry.getPortNr()); 
 			oStr = s.getOutputStream() ; 
 			oStr.write(data); 
