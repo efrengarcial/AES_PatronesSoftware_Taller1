@@ -12,7 +12,7 @@ import com.wtf.comunications.Forwarder;
 import com.wtf.comunications.messages.Message;
 import com.wtf.comunications.messages.ReqDispatcherRegisterMessage;
 
-public class Client2   implements Observer {
+public class Client2   {
 
 	static Forwarder forwarder = ForwarderFactory.get();
 
@@ -26,10 +26,5 @@ public class Client2   implements Observer {
 		forwarder.sendMessage("DISPATCHER", msg);
 		
 	}
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		System.out.println("\nReceived Response: " + arg1 );
-	}
-
+	
 }
