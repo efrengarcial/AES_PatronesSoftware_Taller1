@@ -6,11 +6,11 @@ import com.wtf.comunications.ReceiverUDPComm;
 
 public class ReceiverFactory {
 
-	public static Receiver get(){
-		if (Configuration.PROTOCOL.equals("TCP")) {
-			return new ReceiverTCPComm();
+	public static Receiver get(int port , String protocol){
+		if (protocol.equals("TCP")) {
+			return new ReceiverTCPComm(port);
 		} else {
-			return new ReceiverUDPComm();
+			return new ReceiverUDPComm(port);
 		}
 	}
 

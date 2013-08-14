@@ -8,20 +8,20 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import com.wtf.commons.Configuration;
-
 public class ReceiverTCPComm   extends Receiver {
 
+	private int port;
 	
-	public ReceiverTCPComm() { 
+	public ReceiverTCPComm(int port) { 
+		this.port = port;
 	}
 	
 	public  byte[] receive() {
 		ServerSocket listener = null;
 		try { 
 			//Entry entry = fr.reg.get(myName) ; 
-			System.out.println("El host "+ Configuration.lOCALHOST + ", esta ecuchando el puerto: " + Configuration.PORT );
-			listener  = new ServerSocket(Integer.parseInt(Configuration.PORT), 1000); 
+			System.out.println("El host  esta ecuchando en el puerto: " + port);
+			listener  = new ServerSocket(port, 1000); 
 			while (true) {
 				// starts the event thread			       
 				return new Handler(listener.accept()).run();

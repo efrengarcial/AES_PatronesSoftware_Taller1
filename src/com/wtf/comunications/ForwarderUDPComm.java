@@ -4,7 +4,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-import com.wtf.commons.Configuration;
 import com.wtf.commons.Entry;
 import com.wtf.commons.RegistrySingleton;
 
